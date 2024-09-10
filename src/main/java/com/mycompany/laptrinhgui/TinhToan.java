@@ -89,6 +89,10 @@ public class TinhToan extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 double x = Double.parseDouble(txt1.getText());
                 double y = Double.parseDouble(txt2.getText());
+                if(y == 0){
+                    txtKQ.setText("Không thể chia cho 0");
+                    return;
+                }
                 double kq = x / y;
                 txtKQ.setText(String.valueOf(kq));
             }
