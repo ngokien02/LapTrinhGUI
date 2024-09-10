@@ -37,6 +37,13 @@ public class Calculator extends JFrame {
         for(int i = 0; i < bt.length; i++){
             bt[i] = new JButton(str[i]);
             p2.add(bt[i]);
+            
+            bt[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    txtDisplay.setText(txtDisplay.getText() + e.getActionCommand());
+                }
+            });
         }
         
         setLayout(new BorderLayout());
