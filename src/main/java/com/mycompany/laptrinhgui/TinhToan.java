@@ -24,7 +24,7 @@ public class TinhToan extends JFrame {
     }
 
     public TinhToan() {
-        setTitle("Tinh toan don gian");
+        setTitle("Tính toán đơn giản");
         taoGiaoDien();
         pack();
 //        setSize(400, 300);
@@ -35,19 +35,19 @@ public class TinhToan extends JFrame {
     private void taoGiaoDien() {
         JPanel p1 = new JPanel();
         p1.setLayout(new GridLayout(3, 2, 5, 5));
-        p1.add(lb1 = new JLabel("So thu 1"));
+        p1.add(lb1 = new JLabel("Số đầu tiên"));
         p1.add(txt1 = new JTextField());
         txt1.setPreferredSize(new Dimension(100, 30));
-        p1.add(lb2 = new JLabel("So thu 2"));
+        p1.add(lb2 = new JLabel("Số thứ 2"));
         p1.add(txt2 = new JTextField());
-        p1.add(lb3 = new JLabel("Ket qua"));
+        p1.add(lb3 = new JLabel("Kết quả"));
         p1.add(txtKQ = new JTextField());
 
         JPanel p2 = new JPanel();
-        p2.add(btCong = new JButton("Cong"));
+        p2.add(btCong = new JButton("Cộng"));
         btCong.setPreferredSize(new Dimension(70, 30));
-        p2.add(btTru = new JButton("Tru"));
-        p2.add(btNhan = new JButton("Nhan"));
+        p2.add(btTru = new JButton("Trừ"));
+        p2.add(btNhan = new JButton("Nhân"));
         p2.add(btChia = new JButton("Chia"));
 
         setLayout(new BorderLayout());
