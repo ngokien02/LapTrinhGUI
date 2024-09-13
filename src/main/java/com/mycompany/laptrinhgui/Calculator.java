@@ -21,22 +21,20 @@ public class Calculator extends JFrame {
         "1", "2", "3", "*",
         "0", ".", "=", "/"};
 
-    private double num1, num2;
-    private char operator;
-    private int operatorCount = 0;
-    private double kq;
-
     public static void main(String[] args) {
         Calculator clc = new Calculator();
         clc.setVisible(true);
     }
 
+    private double num1 = 0, num2 = 0, kq = 0;
+    private char operator;
+    private int operatorCount = 0;
+    private boolean flag = true;
+
     private void taoGiaoDien() {
         JPanel p1 = new JPanel();
         p1.add(txtDisplay = new JTextField(50));
         txtDisplay.setPreferredSize(new Dimension(200, 50));
-        txtDisplay.setEditable(false);
-//        p1.add(btClear = new JButton("C"));
 
         JPanel p2 = new JPanel();
         p2.setLayout(new GridLayout(4, 4, 5, 5));
@@ -54,26 +52,42 @@ public class Calculator extends JFrame {
                     String cmd = e.getActionCommand();
                     try {
                         if (cmd.charAt(0) >= '0' && cmd.charAt(0) <= '9' || cmd.equals(".")) {
-                            txtDisplay.setText(txtDisplay.getText() + e.getActionCommand());
+                            if (flag) {
+                                txtDisplay.setText(txtDisplay.getText() + cmd);
+                            } else {
+                                txtDisplay.setText(cmd);
+                                flag = true;
+                            }
                         }
                         if (cmd.equals("+") || cmd.equals("-") || cmd.equals("*") || cmd.equals("/")) {
                             if (operatorCount == 0) {
                                 num1 = Double.parseDouble(txtDisplay.getText());
                                 operator = cmd.charAt(0);
-                                txtDisplay.setText("");
+                                txtDisplay.setText(cmd);
                                 operatorCount++;
-                            } else {
-                                ketQua();
+                                flag = false;
+                            } 
+                            else {
+                                tinhToan();
+                                num1 = kq;
+                                operator = cmd.charAt(0);
+                                txtDisplay.setText(cmd);
+                                flag = false;
                             }
                         }
-                        if(cmd.equals("=")){
-                            ketQua();
+                        if (cmd.equals("=")) {
+                            tinhToan();
+                            txtDisplay.setText(String.valueOf(kq));
+                            flag = false;
+                            operatorCount = 0;
                         }
                         if (cmd.equals("C")) {
                             txtDisplay.setText("");
+                            num1 = num2 = kq = 0;
                         }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Vui lòng nhập đúng thứ tự phép tính!", "Chú ý", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Vui lòng nhập đúng thứ tự phép tính!",
+                                "Chú ý", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -86,7 +100,7 @@ public class Calculator extends JFrame {
 
     }
 
-    public void ketQua() {
+    public void tinhToan() {
         num2 = Double.parseDouble(txtDisplay.getText());
         switch (operator) {
             case '+':
@@ -102,8 +116,7 @@ public class Calculator extends JFrame {
                 kq = num1 / num2;
                 break;
         }
-        txtDisplay.setText(String.valueOf(kq));
-        operatorCount = 0;
+        
     }
 
     public Calculator() {
