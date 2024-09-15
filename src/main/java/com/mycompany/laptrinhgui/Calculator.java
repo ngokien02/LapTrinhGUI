@@ -35,7 +35,6 @@ public class Calculator extends JFrame {
         JPanel p1 = new JPanel();
         p1.add(txtDisplay = new JTextField(50));
         txtDisplay.setPreferredSize(new Dimension(200, 50));
-
         JPanel p2 = new JPanel();
         p2.setLayout(new GridLayout(4, 4, 5, 5));
         for (int i = 0; i < bt.length; i++) {
@@ -66,8 +65,7 @@ public class Calculator extends JFrame {
                                 txtDisplay.setText(cmd);
                                 operatorCount++;
                                 flag = false;
-                            } 
-                            else {
+                            } else {
                                 tinhToan();
                                 num1 = kq;
                                 operator = cmd.charAt(0);
@@ -116,7 +114,6 @@ public class Calculator extends JFrame {
                 kq = num1 / num2;
                 break;
         }
-        
     }
 
     public Calculator() {
